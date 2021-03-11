@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="KinkhaoDB" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=DESKTOP-7UPPMJN;Initial Catalog=KinkhaoDB;Integrated Security=True" SettingsObjectName="KinkhaoForm.Properties.Settings" SettingsPropertyName="KinkhaoDBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TURNO" Member="TURNO">
+    <Type Name="TURNO">
+      <Column Name="Data_Turno" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Inizio" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Fine" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TURNO_ESECUZIONE_CAMERIERE" Member="ESECUZIONE_CAMERIERE" ThisKey="Data_Turno,Ora_Inizio,Ora_Fine" OtherKey="Data_Turno,Ora_Inizio_Turno,Ora_Fine_Turno" Type="ESECUZIONE_CAMERIERE" />
+      <Association Name="TURNO_ESECUZIONE_CASSIERE" Member="ESECUZIONE_CASSIERE" ThisKey="Data_Turno,Ora_Inizio,Ora_Fine" OtherKey="Data_Turno,Ora_Inizio_Turno,Ora_Fine_Turno" Type="ESECUZIONE_CASSIERE" />
+      <Association Name="TURNO_ESECUZIONE_CUOCO" Member="ESECUZIONE_CUOCO" ThisKey="Data_Turno,Ora_Inizio,Ora_Fine" OtherKey="Data_Turno,Ora_Inizio_Turno,Ora_Fine_Turno" Type="ESECUZIONE_CUOCO" />
+      <Association Name="TURNO_SERVIZIO" Member="SERVIZIO" ThisKey="Data_Turno,Ora_Inizio,Ora_Fine" OtherKey="Data_Turno,Ora_Inizio_Turno,Ora_Fine_Turno" Type="SERVIZIO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CAMERIERE" Member="CAMERIERE">
+    <Type Name="CAMERIERE">
+      <Column Name="Codice_Fiscale" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Cognome" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Genere" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.Decimal" DbType="Decimal(11,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Indirizzo" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="E_Mail" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Data_di_Nascita" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="CAMERIERE_CONTRATTO" Member="CONTRATTO" ThisKey="Codice_Fiscale" OtherKey="Cameriere_Codice_Fiscale" Type="CONTRATTO" />
+      <Association Name="CAMERIERE_ESECUZIONE_CAMERIERE" Member="ESECUZIONE_CAMERIERE" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale_Cameriere" Type="ESECUZIONE_CAMERIERE" />
+      <Association Name="CAMERIERE_GRADIMENTO" Member="GRADIMENTO" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale" Type="GRADIMENTO" />
+      <Association Name="CAMERIERE_SERVIZIO" Member="SERVIZIO" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale_Cameriere" Type="SERVIZIO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CASSIERE" Member="CASSIERE">
+    <Type Name="CASSIERE">
+      <Column Name="Codice_Fiscale" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Cognome" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Genere" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.Decimal" DbType="Decimal(11,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Indirizzo" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="E_Mail" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Data_di_Nascita" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="CASSIERE_CONTRATTO" Member="CONTRATTO" ThisKey="Codice_Fiscale" OtherKey="Cassiere_Codice_Fiscale" Type="CONTRATTO" />
+      <Association Name="CASSIERE_ESECUZIONE_CASSIERE" Member="ESECUZIONE_CASSIERE" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale_Cassiere" Type="ESECUZIONE_CASSIERE" />
+      <Association Name="CASSIERE_SCONTRINO" Member="SCONTRINO" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale" Type="SCONTRINO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CLIENTE" Member="CLIENTE">
+    <Type Name="CLIENTE">
+      <Column Name="Numero_di_Telefono" Type="System.Decimal" DbType="Decimal(11,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Cognome" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Association Name="CLIENTE_PRENOTAZIONE" Member="PRENOTAZIONE" ThisKey="Numero_di_Telefono" OtherKey="Numero_di_Telefono" Type="PRENOTAZIONE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CONTRATTO" Member="CONTRATTO">
+    <Type Name="CONTRATTO">
+      <Column Name="Codice_Contratto" Type="System.Decimal" DbType="Decimal(10,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_Inizio" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Stipendio" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Data_Fine" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="Cuoco_Codice_Fiscale" Type="System.String" DbType="Char(16)" CanBeNull="true" />
+      <Column Name="Cassiere_Codice_Fiscale" Type="System.String" DbType="Char(16)" CanBeNull="true" />
+      <Column Name="Cameriere_Codice_Fiscale" Type="System.String" DbType="Char(16)" CanBeNull="true" />
+      <Association Name="CAMERIERE_CONTRATTO" Member="CAMERIERE" ThisKey="Cameriere_Codice_Fiscale" OtherKey="Codice_Fiscale" Type="CAMERIERE" IsForeignKey="true" />
+      <Association Name="CASSIERE_CONTRATTO" Member="CASSIERE" ThisKey="Cassiere_Codice_Fiscale" OtherKey="Codice_Fiscale" Type="CASSIERE" IsForeignKey="true" />
+      <Association Name="CUOCO_CONTRATTO" Member="CUOCO" ThisKey="Cuoco_Codice_Fiscale" OtherKey="Codice_Fiscale" Type="CUOCO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.CUOCO" Member="CUOCO">
+    <Type Name="CUOCO">
+      <Column Name="Codice_Fiscale" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Cognome" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Genere" Type="System.Char" DbType="Char(1) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.Decimal" DbType="Decimal(11,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Indirizzo" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="E_Mail" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Data_di_Nascita" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="CUOCO_CONTRATTO" Member="CONTRATTO" ThisKey="Codice_Fiscale" OtherKey="Cuoco_Codice_Fiscale" Type="CONTRATTO" />
+      <Association Name="CUOCO_ESECUZIONE_CUOCO" Member="ESECUZIONE_CUOCO" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale_Cuoco" Type="ESECUZIONE_CUOCO" />
+      <Association Name="CUOCO_ORDINE" Member="ORDINE" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale" Type="ORDINE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.DDT" Member="DDT">
+    <Type Name="DDT">
+      <Column Name="P_IVA" Type="System.String" DbType="VarChar(11) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Anno" Type="System.String" DbType="Char(4) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Numero" Type="System.String" DbType="Char(3) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_partenza" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Luogo_partenza" Type="System.String" DbType="Char(5) NOT NULL" CanBeNull="false" />
+      <Column Name="Data_consegna" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Corriere" Type="System.String" DbType="Char(10)" CanBeNull="true" />
+      <Association Name="DDT_ORDINE" Member="ORDINE" ThisKey="P_IVA,Anno,Numero" OtherKey="P_IVA,Anno,Numero" Type="ORDINE" />
+      <Association Name="DDT_FATTURA" Member="FATTURA" ThisKey="P_IVA,Anno,Numero" OtherKey="DDT_P_IVA,DDT_Anno,DDT_Numero" Type="FATTURA" />
+      <Association Name="FORNITORE_DDT" Member="FORNITORE" ThisKey="P_IVA" OtherKey="P_IVA" Type="FORNITORE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ESECUZIONE_CAMERIERE" Member="ESECUZIONE_CAMERIERE">
+    <Type Name="ESECUZIONE_CAMERIERE">
+      <Column Name="Codice_Fiscale_Cameriere" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_Turno" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Inizio_Turno" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Fine_Turno" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CAMERIERE_ESECUZIONE_CAMERIERE" Member="CAMERIERE" ThisKey="Codice_Fiscale_Cameriere" OtherKey="Codice_Fiscale" Type="CAMERIERE" IsForeignKey="true" />
+      <Association Name="TURNO_ESECUZIONE_CAMERIERE" Member="TURNO" ThisKey="Data_Turno,Ora_Inizio_Turno,Ora_Fine_Turno" OtherKey="Data_Turno,Ora_Inizio,Ora_Fine" Type="TURNO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ESECUZIONE_CASSIERE" Member="ESECUZIONE_CASSIERE">
+    <Type Name="ESECUZIONE_CASSIERE">
+      <Column Name="Codice_Fiscale_Cassiere" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_Turno" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Inizio_Turno" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Fine_Turno" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CASSIERE_ESECUZIONE_CASSIERE" Member="CASSIERE" ThisKey="Codice_Fiscale_Cassiere" OtherKey="Codice_Fiscale" Type="CASSIERE" IsForeignKey="true" />
+      <Association Name="TURNO_ESECUZIONE_CASSIERE" Member="TURNO" ThisKey="Data_Turno,Ora_Inizio_Turno,Ora_Fine_Turno" OtherKey="Data_Turno,Ora_Inizio,Ora_Fine" Type="TURNO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ESECUZIONE_CUOCO" Member="ESECUZIONE_CUOCO">
+    <Type Name="ESECUZIONE_CUOCO">
+      <Column Name="Data_Turno" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Inizio_Turno" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Fine_Turno" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codice_Fiscale_Cuoco" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CUOCO_ESECUZIONE_CUOCO" Member="CUOCO" ThisKey="Codice_Fiscale_Cuoco" OtherKey="Codice_Fiscale" Type="CUOCO" IsForeignKey="true" />
+      <Association Name="TURNO_ESECUZIONE_CUOCO" Member="TURNO" ThisKey="Data_Turno,Ora_Inizio_Turno,Ora_Fine_Turno" OtherKey="Data_Turno,Ora_Inizio,Ora_Fine" Type="TURNO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FORNITORE" Member="FORNITORE">
+    <Type Name="FORNITORE">
+      <Column Name="P_IVA" Type="System.String" DbType="VarChar(11) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nome_Azienda" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.Decimal" DbType="Decimal(11,0) NOT NULL" CanBeNull="false" />
+      <Column Name="E_Mail" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Stato" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="FORNITORE_DDT" Member="DDT" ThisKey="P_IVA" OtherKey="P_IVA" Type="DDT" />
+      <Association Name="FORNITORE_FATTURA" Member="FATTURA" ThisKey="P_IVA" OtherKey="P_IVA" Type="FATTURA" />
+    </Type>
+  </Table>
+  <Table Name="dbo.GRADIMENTO" Member="GRADIMENTO">
+    <Type Name="GRADIMENTO">
+      <Column Name="Numero_Tavolo" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_Prenotazione" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Prenotazione" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Importo_Mancia" Type="System.Decimal" DbType="Decimal(5,2)" CanBeNull="true" />
+      <Column Name="Livello_di_Gradimento" Type="System.Decimal" DbType="Decimal(1,0)" CanBeNull="true" />
+      <Column Name="Codice_Fiscale" Type="System.String" DbType="Char(16) NOT NULL" CanBeNull="false" />
+      <Association Name="CAMERIERE_GRADIMENTO" Member="CAMERIERE" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale" Type="CAMERIERE" IsForeignKey="true" />
+      <Association Name="PRENOTAZIONE_GRADIMENTO" Member="PRENOTAZIONE" ThisKey="Numero_Tavolo,Data_Prenotazione,Ora_Prenotazione" OtherKey="Numero,Data_Prenotazione,Ora" Type="PRENOTAZIONE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.INGREDIENTE" Member="INGREDIENTE">
+    <Type Name="INGREDIENTE">
+      <Column Name="Codice" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Scorta" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Descrizione" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Association Name="INGREDIENTE_ORDINE" Member="ORDINE" ThisKey="Codice" OtherKey="Codice_Ingrediente" Type="ORDINE" />
+      <Association Name="INGREDIENTE_REALIZZAZIONE" Member="REALIZZAZIONE" ThisKey="Codice" OtherKey="Codice_Ingrediente" Type="REALIZZAZIONE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDINABILE" Member="ORDINABILE">
+    <Type Name="ORDINABILE">
+      <Column Name="Codice" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nome" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Prezzo" Type="System.Decimal" DbType="Decimal(5,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Descrizione" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="ORDINABILE_REALIZZAZIONE" Member="REALIZZAZIONE" ThisKey="Codice" OtherKey="Codice_Ordinabile" Type="REALIZZAZIONE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDINAZIONE" Member="ORDINAZIONE">
+    <Type Name="ORDINAZIONE">
+      <Column Name="Numero_Tavolo" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_Prenotazione" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Prenotazione" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codice_Ordinabile" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Quantità" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Association Name="PRENOTAZIONE_ORDINAZIONE" Member="PRENOTAZIONE" ThisKey="Numero_Tavolo,Data_Prenotazione,Ora_Prenotazione" OtherKey="Numero,Data_Prenotazione,Ora" Type="PRENOTAZIONE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ORDINE" Member="ORDINE">
+    <Type Name="ORDINE">
+      <Column Name="Codice_Ordine" Type="System.Decimal" DbType="Decimal(10,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Prezzo_Unitario" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Quantità" Type="System.Decimal" DbType="Decimal(2,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Data_Ordine" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="P_IVA" Type="System.String" DbType="VarChar(11)" CanBeNull="true" />
+      <Column Name="Anno" Type="System.String" DbType="Char(4)" CanBeNull="true" />
+      <Column Name="Numero" Type="System.String" DbType="Char(3)" CanBeNull="true" />
+      <Column Name="Codice_Ingrediente" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Codice_Fiscale" Type="System.String" DbType="Char(16) NOT NULL" CanBeNull="false" />
+      <Association Name="CUOCO_ORDINE" Member="CUOCO" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale" Type="CUOCO" IsForeignKey="true" />
+      <Association Name="INGREDIENTE_ORDINE" Member="INGREDIENTE" ThisKey="Codice_Ingrediente" OtherKey="Codice" Type="INGREDIENTE" IsForeignKey="true" />
+      <Association Name="DDT_ORDINE" Member="DDT" ThisKey="P_IVA,Anno,Numero" OtherKey="P_IVA,Anno,Numero" Type="DDT" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PAGAMENTO" Member="PAGAMENTO">
+    <Type Name="PAGAMENTO">
+      <Column Name="Numero_Tavolo" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_Prenotazione" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Prenotazione" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_Scontrino" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Numero_Scontrino" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Metodo_di_Pagamento" Type="System.String" DbType="Char(15) NOT NULL" CanBeNull="false" />
+      <Association Name="PRENOTAZIONE_PAGAMENTO" Member="PRENOTAZIONE" ThisKey="Numero_Tavolo,Data_Prenotazione,Ora_Prenotazione" OtherKey="Numero,Data_Prenotazione,Ora" Type="PRENOTAZIONE" IsForeignKey="true" />
+      <Association Name="SCONTRINO_PAGAMENTO" Member="SCONTRINO" ThisKey="Data_Scontrino,Numero_Scontrino" OtherKey="Data_Scontrino,Numero" Type="SCONTRINO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.PRENOTAZIONE" Member="PRENOTAZIONE">
+    <Type Name="PRENOTAZIONE">
+      <Column Name="Numero" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_Prenotazione" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Numero_Persone" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Numero_di_Telefono" Type="System.Decimal" DbType="Decimal(11,0) NOT NULL" CanBeNull="false" />
+      <Association Name="PRENOTAZIONE_GRADIMENTO" Member="GRADIMENTO" ThisKey="Numero,Data_Prenotazione,Ora" OtherKey="Numero_Tavolo,Data_Prenotazione,Ora_Prenotazione" Type="GRADIMENTO" Cardinality="One" />
+      <Association Name="PRENOTAZIONE_ORDINAZIONE" Member="ORDINAZIONE" ThisKey="Numero,Data_Prenotazione,Ora" OtherKey="Numero_Tavolo,Data_Prenotazione,Ora_Prenotazione" Type="ORDINAZIONE" />
+      <Association Name="PRENOTAZIONE_PAGAMENTO" Member="PAGAMENTO" ThisKey="Numero,Data_Prenotazione,Ora" OtherKey="Numero_Tavolo,Data_Prenotazione,Ora_Prenotazione" Type="PAGAMENTO" Cardinality="One" />
+      <Association Name="CLIENTE_PRENOTAZIONE" Member="CLIENTE" ThisKey="Numero_di_Telefono" OtherKey="Numero_di_Telefono" Type="CLIENTE" IsForeignKey="true" />
+      <Association Name="TAVOLO_PRENOTAZIONE" Member="TAVOLO" ThisKey="Numero" OtherKey="Numero_Tavolo" Type="TAVOLO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.REALIZZAZIONE" Member="REALIZZAZIONE">
+    <Type Name="REALIZZAZIONE">
+      <Column Name="Codice_Ordinabile" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codice_Ingrediente" Type="System.String" DbType="Char(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="INGREDIENTE_REALIZZAZIONE" Member="INGREDIENTE" ThisKey="Codice_Ingrediente" OtherKey="Codice" Type="INGREDIENTE" IsForeignKey="true" />
+      <Association Name="ORDINABILE_REALIZZAZIONE" Member="ORDINABILE" ThisKey="Codice_Ordinabile" OtherKey="Codice" Type="ORDINABILE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SCONTRINO" Member="SCONTRINO">
+    <Type Name="SCONTRINO">
+      <Column Name="Data_Scontrino" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Numero" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Totale" Type="System.Decimal" DbType="Decimal(6,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Coperto" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Codice_Fiscale" Type="System.String" DbType="Char(16) NOT NULL" CanBeNull="false" />
+      <Association Name="SCONTRINO_PAGAMENTO" Member="PAGAMENTO" ThisKey="Data_Scontrino,Numero" OtherKey="Data_Scontrino,Numero_Scontrino" Type="PAGAMENTO" />
+      <Association Name="CASSIERE_SCONTRINO" Member="CASSIERE" ThisKey="Codice_Fiscale" OtherKey="Codice_Fiscale" Type="CASSIERE" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.SERVIZIO" Member="SERVIZIO">
+    <Type Name="SERVIZIO">
+      <Column Name="Numero_Tavolo" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Codice_Fiscale_Cameriere" Type="System.String" DbType="Char(16) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Data_Turno" Type="System.DateTime" DbType="Date NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Inizio_Turno" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Ora_Fine_Turno" Type="System.Decimal" DbType="Decimal(4,2) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="CAMERIERE_SERVIZIO" Member="CAMERIERE" ThisKey="Codice_Fiscale_Cameriere" OtherKey="Codice_Fiscale" Type="CAMERIERE" IsForeignKey="true" />
+      <Association Name="TURNO_SERVIZIO" Member="TURNO" ThisKey="Data_Turno,Ora_Inizio_Turno,Ora_Fine_Turno" OtherKey="Data_Turno,Ora_Inizio,Ora_Fine" Type="TURNO" IsForeignKey="true" />
+      <Association Name="TAVOLO_SERVIZIO" Member="TAVOLO" ThisKey="Numero_Tavolo" OtherKey="Numero_Tavolo" Type="TAVOLO" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TAVOLO" Member="TAVOLO">
+    <Type Name="TAVOLO">
+      <Column Name="Numero_Tavolo" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Numero_Posti" Type="System.Decimal" DbType="Decimal(3,0) NOT NULL" CanBeNull="false" />
+      <Column Name="Descrizione" Type="System.String" DbType="Char(10) NOT NULL" CanBeNull="false" />
+      <Association Name="TAVOLO_PRENOTAZIONE" Member="PRENOTAZIONE" ThisKey="Numero_Tavolo" OtherKey="Numero" Type="PRENOTAZIONE" />
+      <Association Name="TAVOLO_SERVIZIO" Member="SERVIZIO" ThisKey="Numero_Tavolo" OtherKey="Numero_Tavolo" Type="SERVIZIO" />
+    </Type>
+  </Table>
+  <Table Name="dbo.FATTURA" Member="FATTURA">
+    <Type Name="FATTURA">
+      <Column Name="P_IVA" Type="System.String" DbType="VarChar(11) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Anno" Type="System.Decimal" DbType="Decimal(4,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Numero" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="DDT_P_IVA" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+      <Column Name="DDT_Anno" Type="System.String" DbType="Char(4) NOT NULL" CanBeNull="false" />
+      <Column Name="DDT_Numero" Type="System.String" DbType="Char(3) NOT NULL" CanBeNull="false" />
+      <Column Name="Importo_Netto" Type="System.Decimal" DbType="Decimal(5,0) NOT NULL" CanBeNull="false" />
+      <Column Name="IVA" Type="System.Decimal" DbType="Decimal(20,2) NOT NULL" CanBeNull="false" />
+      <Column Name="Pagata" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="Data_Fattura" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="FORNITORE_FATTURA" Member="FORNITORE" ThisKey="P_IVA" OtherKey="P_IVA" Type="FORNITORE" IsForeignKey="true" />
+      <Association Name="DDT_FATTURA" Member="DDT" ThisKey="DDT_P_IVA,DDT_Anno,DDT_Numero" OtherKey="P_IVA,Anno,Numero" Type="DDT" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
